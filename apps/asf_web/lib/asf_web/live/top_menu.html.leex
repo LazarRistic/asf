@@ -1,19 +1,33 @@
-<div class="w-full flex flex-row bg-white justify-between">
-    <div class="pl-4">
-        <a href="https://phoenixframework.org/" class="toggleColour text-white no-underline hover:no-underline font-bold text-2xl lg:text-4xl">
-            <img class="h-8 fill-current inline" src="<%= Routes.static_path(@socket, "/images/sass_logo.jpg") %>" alt="Srpski Airsoft Savez"/>
-        </a>
+<nav id="header" class="fixed w-full z-30 top-0 text-white bg-gray-900">
+    <div class="w-full flex flex-row bg-white justify-between">
+        <div class="pl-4">
+            <a href="https://phoenixframework.org/" class="toggleColour text-white no-underline hover:no-underline font-bold text-2xl lg:text-4xl">
+                <img class="h-8 fill-current inline" src="<%= Routes.static_path(@socket, "/images/sass_logo.jpg") %>" alt="Srpski Airsoft Savez"/>
+            </a>
+        </div>
+        <div class="pr-4">
+            <ul class="list-reset lg:flex justify-end flex-1 items-center">
+                <%= if @current_user do %>
+                <li class="mr-3 text-blue-500"><%= link "Settings", to: Routes.user_settings_path(@socket, :edit) %></li>
+                <li class="mr-3"><button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"><%= link "Sign out", to: Routes.user_session_path(@socket, :delete), method: :delete %></button></li>
+                <p><%= @current_user.email %></p>
+                <% else %>
+                <li class="mr-3 text-blue-500"><%= link "Sign in", to: Routes.user_session_path(@socket, :new) %></li>
+                <li class="mr-3"><button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"><%= link "Sign up", to: Routes.user_registration_path(@socket, :new) %></button></li>
+                <% end %>
+            </ul>
+        </div>
     </div>
-    <div class="pr-4">
-        <ul class="list-reset lg:flex justify-end flex-1 items-center">
-            <%= if @current_user do %>
-            <li class="mr-3 text-blue-500"><%= link "Settings", to: Routes.user_settings_path(@socket, :edit) %></li>
-            <li class="mr-3"><button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"><%= link "Sign out", to: Routes.user_session_path(@socket, :delete), method: :delete %></button></li>
-            <p><%= @current_user.email %></p>
-            <% else %>
-            <li class="mr-3 text-blue-500"><%= link "Sign in", to: Routes.user_session_path(@socket, :new) %></li>
-            <li class="mr-3"><button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"><%= link "Sign up", to: Routes.user_registration_path(@socket, :new) %></button></li>
+    <div class="w-full flex flex-row bg-white justify-between">
+        <ul class="list-reset lg:flex justify-center flex-1 items-center">
+            <li class="mr-3 text-black hover:text-red-500 uppercase font-bold text-4xl">
+                <a href="https://hexdocs.pm/phoenix/overview.html">Home</a>
+            </li>
+            <%= if function_exported?(Routes, :live_dashboard_path, 2) do %>
+                <li class="mr-3 text-black hover:text-red-500 uppercase font-bold text-4xl">
+                    <%= link "LiveDashboard", to: Routes.live_dashboard_path(@socket, :home) %>
+                </li>
             <% end %>
         </ul>
     </div>
-</div>
+</nav>

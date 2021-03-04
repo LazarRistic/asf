@@ -7,9 +7,7 @@
     <script defer type="text/javascript" src="<%= Routes.static_path(@conn, "/js/app.js") %>"></script>
   </head>
   <body>
-    <nav id="header" class="fixed w-full z-30 top-0 text-white bg-gray-900">
-        <%= live_render @conn, AsfWeb.Live.TopMenu, session: %{"current_path"=> @conn.request_path, "query_string"=> @conn.query_string, "current_user" => @current_user} %>
-    </nav>
+    <%= live_render @conn, AsfWeb.Live.TopMenu, session: %{"current_path"=> @conn.request_path, "query_string"=> @conn.query_string, "current_user" => @current_user} %>
     <%= @inner_content %>
   </body>
 </html>
