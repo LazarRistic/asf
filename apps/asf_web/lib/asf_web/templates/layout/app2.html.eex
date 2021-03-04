@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <%= csrf_meta_tag() %>
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Asf · Phoenix Framework</title>
+    <link rel="stylesheet" href="<%= Routes.static_path(@conn, "/css/app.css") %>"/>
+    <script defer type="text/javascript" src="<%= Routes.static_path(@conn, "/js/app.js") %>"></script>
+  </head>
+  <body>
+    <header>
+      <section class="container">
+        <nav id="header" class="fixed w-full z-30 top-0 text-white bg-gray-900">
+          <div class="w-full container mx-auto flex flex-wrap items-center justify-between mt-0 py-2">
+            <div class="pl-4 flex items-center">
+              <a href="https://phoenixframework.org/" class="toggleColour text-white no-underline hover:no-underline font-bold text-2xl lg:text-4xl">
+                <img class="h-8 fill-current inline" src="<%= Routes.static_path(@conn, "/images/sass_logo.jpg") %>" alt="Srpski Airsoft Savez"/>
+              </a>
+            </div>
+            <div class="block lg:hidden pr-4">
+              <button id="nav-toggle" class="flex items-center p-1 text-pink-800 hover:text-gray-100 focus:outline-none focus:shadow-outline transform transition hover:scale-105 duration-300 ease-in-out">
+                <svg class="fill-current h-6 w-6" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                  <title>Menu</title>
+                  <path d="M0 3h20v2H0V3zm0 6h20v2H0V9zm0 6h20v2H0v-2z" />
+                </svg>
+              </button>
+            </div>
+            <div class="w-full flex-grow lg:flex lg:items-center lg:w-auto hidden mt-2 lg:mt-0 bg-white lg:bg-transparent text-white p-4 lg:p-0 z-20" id="nav-content">
+              <%= render "_user_menu.html", assigns %>
+            </div>
+          </div>
+          <div class="w-full container mx-auto flex flex-wrap items-center justify-between mt-0 py-2">
+            <div class="w-full justify-center items-center">
+              <ul class="list-reset lg:flex justify-center flex-1 items-center">
+                  <li class="mr-3"><a href="https://hexdocs.pm/phoenix/overview.html">Get Started</a></li>
+                  <%= if function_exported?(Routes, :live_dashboard_path, 2) do %>
+                    <li class="mr-3"><%= link "LiveDashboard", to: Routes.live_dashboard_path(@conn, :home) %></li>
+                  <% end %>
+                </ul>
+            </div>
+          </div>
+        </nav>
+      </section>
+    </header>
+    <main role="main" class="container">
+      <p class="alert alert-info" role="alert"><%= get_flash(@conn, :info) %></p>
+      <p class="alert alert-danger" role="alert"><%= get_flash(@conn, :error) %></p>
+      <%= @inner_content %>
+    </main>
+  </body>
+</html>
