@@ -16,7 +16,7 @@
           <div class="w-full container mx-auto flex flex-wrap items-center justify-between mt-0 py-2">
             <div class="pl-4 flex items-center">
               <a href="https://phoenixframework.org/" class="toggleColour text-white no-underline hover:no-underline font-bold text-2xl lg:text-4xl">
-                <img class="h-8 fill-current inline" src="<%= Routes.static_path(@conn, "/images/sass_logo.jpg") %>" alt="Srpski Airsoft Savez"/>
+                <img class="h-8 fill-current inline" src="<%= Routes.static_path(@conn, "/images/sass_logo.png") %>" alt="Srpski Airsoft Savez"/>
               </a>
             </div>
             <div class="block lg:hidden pr-4">

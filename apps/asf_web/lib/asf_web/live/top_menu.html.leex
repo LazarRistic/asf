@@ -1,33 +1,89 @@
-<nav id="header" class="fixed w-full z-30 top-0 text-white bg-gray-900">
-    <div class="w-full flex flex-row bg-white justify-between">
-        <div class="pl-4">
-            <a href="https://phoenixframework.org/" class="toggleColour text-white no-underline hover:no-underline font-bold text-2xl lg:text-4xl">
-                <img class="h-8 fill-current inline" src="<%= Routes.static_path(@socket, "/images/sass_logo.jpg") %>" alt="Srpski Airsoft Savez"/>
-            </a>
-        </div>
-        <div class="pr-4">
-            <ul class="list-reset lg:flex justify-end flex-1 items-center">
-                <%= if @current_user do %>
-                <li class="mr-3 text-blue-500"><%= link "Settings", to: Routes.user_settings_path(@socket, :edit) %></li>
-                <li class="mr-3"><button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"><%= link "Sign out", to: Routes.user_session_path(@socket, :delete), method: :delete %></button></li>
-                <p><%= @current_user.email %></p>
-                <% else %>
-                <li class="mr-3 text-blue-500"><%= link "Sign in", to: Routes.user_session_path(@socket, :new) %></li>
-                <li class="mr-3"><button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"><%= link "Sign up", to: Routes.user_registration_path(@socket, :new) %></button></li>
-                <% end %>
-            </ul>
-        </div>
+<div class="relative bg-white">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6">
+    <div class="flex justify-between items-center border-b-2 border-gray-100 py-6 md:justify-start md:space-x-10">
+      <div class="flex justify-start lg:w-0 lg:flex-1">
+        <a href="#">
+          <span class="sr-only">SASS</span>
+          <img class="h-8 w-auto sm:h-10" src="<%= Routes.static_path(@socket, "/images/sass_logo.png") %>" alt="Srpski Airsoft Savez">
+        </a>
+      </div>
+      <div class="-mr-2 -my-2 md:hidden">
+        <button type="button" phx-click="toggle_menu" class="bg-white rounded-md p-2 inline-flex items-center justify-center text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500">
+          <span class="sr-only">Open menu</span>
+          <!-- Heroicon name: outline/menu -->
+          <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+          </svg>
+        </button>
+      </div>
+      <nav class="hidden md:flex space-x-10">
+
+        <%= link "Home", to: "/", class: "text-base font-medium text-gray-500 hover:text-gray-900" %>
+        <%= link "Docs", to: Routes.live_path(@socket, AsfWeb.Live.Documents), class: "text-base font-medium text-gray-500 hover:text-gray-900" %>
+
+      </nav>
+      <div class="hidden md:flex items-center justify-end md:flex-1 lg:w-0">
+        <%= if @current_user do %>
+          <%= link "Settings", to: Routes.user_session_path(@socket, :edit), class: "whitespace-nowrap text-base font-medium text-gray-500 hover:text-gray-900" %>
+          <%= link "Sign out", to: Routes.user_session_path(@socket, :delete), method: :delete, class: "ml-8 whitespace-nowrap inline-flex items-center justify-center px-4 py-2 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-indigo-600 hover:bg-indigo-700" %>
+        <% else %>
+          <%= link "Sign in", to: Routes.user_session_path(@socket, :new), class: "whitespace-nowrap text-base font-medium text-gray-500 hover:text-gray-900" %>
+          <%= link "Sign up", to: Routes.user_registration_path(@socket, :new), class: "ml-8 whitespace-nowrap inline-flex items-center justify-center px-4 py-2 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-indigo-600 hover:bg-indigo-700" %>
+        <% end %>
+      </div>
     </div>
-    <div class="w-full flex flex-row bg-white justify-between">
-        <ul class="list-reset lg:flex justify-center flex-1 items-center">
-            <li class="mr-3 text-black hover:text-red-500 uppercase font-bold text-4xl">
-                <a href="https://hexdocs.pm/phoenix/overview.html">Home</a>
-            </li>
-            <%= if function_exported?(Routes, :live_dashboard_path, 2) do %>
-                <li class="mr-3 text-black hover:text-red-500 uppercase font-bold text-4xl">
-                    <%= link "LiveDashboard", to: Routes.live_dashboard_path(@socket, :home) %>
-                </li>
+  </div>
+
+  <!--
+    Mobile menu, show/hide based on mobile menu state.
+
+    Entering: "duration-200 ease-out"
+      From: "opacity-0 scale-95"
+      To: "opacity-100 scale-100"
+    Leaving: "duration-100 ease-in"
+      From: "opacity-100 scale-100"
+      To: "opacity-0 scale-95"
+  -->
+  <%= if @is_open? do %>
+    <div class="absolute top-0 inset-x-0 p-2 transition transform origin-top-right md:hidden">
+      <div class="rounded-lg shadow-lg ring-1 ring-black ring-opacity-5 bg-white divide-y-2 divide-gray-50">
+        <div class="pt-5 pb-6 px-5">
+          <div class="flex items-center justify-between">
+            <div>
+              <img class="h-8 w-auto" src="https://tailwindui.com/img/logos/workflow-mark-indigo-600.svg" alt="Workflow">
+            </div>
+            <div class="-mr-2">
+              <button type="button" phx-click="toggle_menu" class="bg-white rounded-md p-2 inline-flex items-center justify-center text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500">
+                <span class="sr-only">Close menu</span>
+                <!-- Heroicon name: outline/x -->
+                <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                </svg>
+              </button>
+            </div>
+          </div>
+        </div>
+        <div class="py-6 px-5 space-y-6">
+          <div class="grid grid-cols-2 gap-y-4 gap-x-8">
+            <%= link "Home", to: "/", class: "text-base font-medium text-gray-900 hover:text-gray-700" %>
+            <%= link "Docs", to: Routes.live_path(@socket, AsfWeb.Live.Documents), class: "text-base font-medium text-gray-900 hover:text-gray-700" %>
+            <%= if @current_user do %>
+              <%= link "Settings", to: Routes.user_session_path(@socket, :edit), class: "text-base font-medium text-gray-900 hover:text-gray-700" %>
             <% end %>
-        </ul>
+          </div>
+          <div>
+            <%= if @current_user do %>
+              <%= link "Sign out", to: Routes.user_session_path(@socket, :delete), method: :delete, class: "hitespace-nowrap text-base font-medium text-gray-500 hover:text-gray-900" %>
+            <% else %>
+              <%= link "Sign up", to: Routes.user_registration_path(@socket, :new), class: "w-full flex items-center justify-center px-4 py-2 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-indigo-600 hover:bg-indigo-700" %>
+              <p class="mt-6 text-center text-base font-medium text-gray-500">
+                Existing customer?
+                <%= link "Sign in", to: Routes.user_session_path(@socket, :new), class: "text-indigo-600 hover:text-indigo-500" %>
+              </p>
+            <% end %>
+          </div>
+        </div>
+      </div>
     </div>
-</nav>
+  <% end %>
+</div>
