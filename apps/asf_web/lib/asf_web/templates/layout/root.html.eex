@@ -11,6 +11,17 @@
   </head>
   <body style>
     <%= live_render @conn, AsfWeb.Live.TopMenu, session: %{"current_path"=> @conn.request_path, "query_string"=> @conn.query_string, "current_user" => @current_user} %>
-    <%= @inner_content %>
+    <header class="bg-white shadow">
+      <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
+        <h1 class="text-3xl font-bold text-gray-900">
+          <p><%= assigns[:page_title] %></p>
+        </h1>
+      </div>
+    </header>
+    <main>
+      <div class="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8">
+        <%= @inner_content %>
+      </div>
+    </main>
   </body>
 </html>
