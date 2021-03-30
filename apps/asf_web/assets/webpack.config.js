@@ -61,6 +61,13 @@ module.exports = (env, options) => {
         }
       ]
     },
+    resolve: {
+      modules: ['node_modules', path.resolve(__dirname, 'js'),path.resolve(__dirname, 'css')],
+      extensions: ['.js','.css'],
+      alias: {
+        'jquery': path.join(__dirname, 'node_modules/jquery/src/jquery')
+      } 
+    },
     plugins: [
       new MiniCssExtractPlugin({ filename: '../css/app.css' }),
       new CopyWebpackPlugin([{ from: 'static/', to: '../' }])
