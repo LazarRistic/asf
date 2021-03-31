@@ -1,6 +1,13 @@
 /* This file is for your main application css. */
 /* @import "./phoenix.css"; */
 
+:root {
+  --color-primary: #5c6ac4;
+  --color-secondary: #ecc94b;
+  --color-input-error: #a94442;
+  /* ... */
+}
+
 @tailwind base;
 
 @tailwind components;

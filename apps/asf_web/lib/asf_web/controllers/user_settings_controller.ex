@@ -7,6 +7,7 @@ defmodule AsfWeb.UserSettingsController do
   plug :assign_email_and_password_changesets
 
   def edit(conn, _params) do
+    conn = assign(conn, :page_title, "Settings")
     render(conn, "edit.html")
   end
 
