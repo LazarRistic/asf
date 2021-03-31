@@ -7,7 +7,11 @@ defmodule Asf.DocumentsTest do
     alias Asf.Documents.Document
 
     @valid_attrs %{content: "some content", sub_title: "some sub_title", title: "some title"}
-    @update_attrs %{content: "some updated content", sub_title: "some updated sub_title", title: "some updated title"}
+    @update_attrs %{
+      content: "some updated content",
+      sub_title: "some updated sub_title",
+      title: "some updated title"
+    }
     @invalid_attrs %{content: nil, sub_title: nil, title: nil}
 
     def document_fixture(attrs \\ %{}) do

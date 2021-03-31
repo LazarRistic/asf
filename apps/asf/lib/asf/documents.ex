@@ -51,6 +51,7 @@ defmodule Asf.Documents do
   """
   def create_document(attrs \\ %{}) do
     attrs = Map.put_new(attrs, "uuid", UUID.uuid4())
+
     %Document{}
     |> Document.changeset(attrs)
     |> IO.inspect(label: "CHANGESET", limit: :infinity, pretty: true)

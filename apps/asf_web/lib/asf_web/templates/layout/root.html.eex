@@ -8,7 +8,6 @@
     <%= live_title_tag assigns[:page_title] || "MyApp" %>
     <link rel="stylesheet" href="<%= Routes.static_path(@conn, "/css/app.css") %>"/>
     <script defer type="text/javascript" src="<%= Routes.static_path(@conn, "/js/app.js") %>"></script>
-    <script src="https://cdn.tiny.cloud/1/rh0fhr3ubhf58mf6eyvwjzdu6lg34u0y2h2adbp48pc6ysjs/tinymce/5/tinymce.min.js"></script>
   </head>
   <body style>
     <%= live_render @conn, AsfWeb.Live.TopMenu, session: %{"current_path"=> @conn.request_path, "query_string"=> @conn.query_string, "current_user" => @current_user} %>

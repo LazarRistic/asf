@@ -47,7 +47,7 @@ defmodule AsfWeb.MixProject do
       {:telemetry_metrics, "~> 0.4"},
       {:telemetry_poller, "~> 0.4"},
       {:gettext, "~> 0.11"},
-      {:elixir_uuid, "~> 1.2" },
+      {:elixir_uuid, "~> 1.2"},
       {:asf, in_umbrella: true},
       {:jason, "~> 1.0"},
       {:plug_cowboy, "~> 2.0"},

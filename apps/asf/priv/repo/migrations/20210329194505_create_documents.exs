@@ -10,6 +10,5 @@ defmodule Asf.Repo.Migrations.CreateDocuments do
 
       timestamps()
     end
-
   end
 end

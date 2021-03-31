@@ -12,7 +12,7 @@ defmodule AsfWeb.Live.Documents do
   end
 
   def handle_params(_params, _url, socket) do
-    documents = Documents.list_documents
+    documents = Documents.list_documents()
     changeset = Document.changeset(%Document{}, %{})
 
     {:noreply,
@@ -43,8 +43,9 @@ defmodule AsfWeb.Live.Documents do
       case Documents.create_document(document) do
         {:ok, %Document{}} ->
           IO.inspect("USPEO JE DA NAPRAVI")
+
           assign(socket,
-            documents: Documents.list_documents,
+            documents: Documents.list_documents(),
             changeset: Document.changeset(%Document{}, %{})
           )
 
