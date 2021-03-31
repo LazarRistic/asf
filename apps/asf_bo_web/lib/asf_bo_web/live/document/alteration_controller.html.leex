@@ -1,0 +1,19 @@
+<div id="edit-document" class="w-full mt-20">
+    <%= f = form_for @changeset, "#", [phx_submit: "save_document"] %>
+        <div>
+          <%= label f, :title, class: "sr-only" %>
+          <%= text_input f, :title, required: true, class: "appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm", placeholder: "Title" %>
+          <%= error_tag f, :title %>
+        </div>
+        <div phx-hook="MountTinyMCE" id="mount-tiny-mce"></div>
+        <div id="rich-text-editor">
+          <%= label f, :content, class: "sr-only" %>
+          <div id="tiny-mce-holder" phx-update="ignore">
+           <%= textarea f, :content, placeholder: "Enter text here...", class: "tiny-mce" %>
+          </div>
+          <%= error_tag f, :content %>
+        </div>
+
+        <%= submit "Save", phx_disable_with: "Saving...", class: "rounded-none group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-b-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" %>
+    </form>
+</div>

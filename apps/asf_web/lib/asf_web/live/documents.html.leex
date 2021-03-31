@@ -1,13 +1,60 @@
-<div class="ml-16 mr-16">
-    <h1 class="text-yellow-500 text-5xl">SASS Dokumenta 2021</h1>
-    <div class="h-6"></div>
-    <p class="text-gray-700">Last updated: 1/13/2020</p>
-    <div class="w-full flex flex-row justify-between items-center pb-8 border-b-2">
-        <div>
-            <span class="text-3xl">GENERAL RULES, SAFETY REQUIREMENTS & AGE REQUIREMENTS</span>
-        </div>
-        <div>
-            <p class="box-content border-4 p-1 fa-2x fas fa-plus text-yellow-500"></p>
-        </div>
+<div id="documents" class="container flex flex-col mx-auto max-w-7xl items-center justify-center bg-white dark:bg-gray-800 rounded-lg shadow">
+    <div class="px-4 py-5 sm:px-6 border-b w-full">
+        <h3 class="text-lg leading-6 font-medium text-gray-900 dark:text-white">
+            SASS Docs <%= NaiveDateTime.local_now().year %>
+        </h3>
+        <p class="mt-1 max-w-2xl text-sm text-gray-500 dark:text-gray-200">
+            Details and informations about documents.
+        </p>
     </div>
+    <ul class="flex flex-col divide divide-y md:w-full list-none">
+        <%= if @documents == [] do %>
+            <li>
+                <div class="flex flex-row">
+                    <div class="select-none cursor-pointer flex flex-1 items-center p-4">
+                        <div class="flex-1 pl-1 mr-16">
+                            <div class="font-medium dark:text-white">
+                                <p>No documents</p>
+                            </div>
+                            <div class="text-gray-600 dark:text-gray-200 text-sm">
+                                <%#= document.subtitle %>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </li>
+        <% end %>
+        <%= for document <- @documents do %>
+            <li>
+                <div class="flex flex-row">
+                    <div class="select-none cursor-pointer flex flex-1 items-center p-4">
+                        <div class="flex-1 pl-1 mr-16">
+                            <div class="font-medium dark:text-white">
+                                <%= String.upcase(document.title) %>
+                            </div>
+                            <div class="text-gray-600 dark:text-gray-200 text-sm">
+                                <%#= document.subtitle %>
+                            </div>
+                        </div>
+                        <div class="text-gray-600 dark:text-gray-200 text-xs">
+                            <%= "#{document.updated_at.day}.#{document.updated_at.month}.#{document.updated_at.year}" %>
+                        </div>
+                        <button class="w-24 text-right flex justify-end outline-none focus:outline-none" phx-click="toggle_document" phx-value-id="<%= document.uuid %>">
+                            <svg width="20" fill="currentColor" height="20" class="hover:text-indigo-700 dark:hover:text-white dark:text-gray-200 text-indigo-600" viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg" style="<%= if "#{document.uuid}" in @expanded_docs do "transform: rotate(90deg);" end %>">
+                                <path d="M1363 877l-742 742q-19 19-45 19t-45-19l-166-166q-19-19-19-45t19-45l531-531-531-531q-19-19-19-45t19-45l166-166q19-19 45-19t45 19l742 742q19 19 19 45t-19 45z">
+                                </path>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+                <div class="<%= if "#{document.uuid}" in @expanded_docs do "block" else "hidden" end %> flex flex-row flex-1 pl-1 mr-16">
+                    <div class="select-none cursor-pointer flex flex-1 items-center p-4">
+                        <div class="flex-1 pl-1 mr-16 list-inside">
+                            <%= raw(document.content) %>
+                        </div>
+                    </div>
+                </div>
+            </li>
+        <% end %>
+    </ul>
 </div>

@@ -30,6 +30,21 @@ config :asf_web, AsfWeb.Endpoint,
     ]
   ]
 
+config :asf_bo_web, AsfBOWeb.Endpoint,
+  http: [port: 4010],
+  debug_errors: true,
+  code_reloader: true,
+  check_origin: false,
+  watchers: [
+    node: [
+      "node_modules/webpack/bin/webpack.js",
+      "--mode",
+      "development",
+      "--watch-stdin",
+      cd: Path.expand("../apps/asf_web/assets", __DIR__)
+    ]
+  ]
+
 # ## SSL Support
 #
 # In order to use HTTPS in development, a self-signed
@@ -56,6 +71,16 @@ config :asf_web, AsfWeb.Endpoint,
 
 # Watch static and templates for browser reloading.
 config :asf_web, AsfWeb.Endpoint,
+  live_reload: [
+    patterns: [
+      ~r"priv/static/.*(js|css|png|jpeg|jpg|gif|svg)$",
+      ~r"priv/gettext/.*(po)$",
+      ~r"lib/asf_web/(live|views)/.*(ex)$",
+      ~r"lib/asf_web/templates/.*(eex)$"
+    ]
+  ]
+
+config :asf_bo_web, AsfBOWeb.Endpoint,
   live_reload: [
     patterns: [
       ~r"priv/static/.*(js|css|png|jpeg|jpg|gif|svg)$",

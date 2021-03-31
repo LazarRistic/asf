@@ -15,12 +15,13 @@ import "../css/app.css"
 import "phoenix_html"
 import LiveSocket from "phoenix_live_view"
 import { Socket } from "phoenix"
+
+var $ = require( "jquery" );
 let socket = new Socket("/ws")
-
-
+let LiveHooks = {};
 
 let csrfToken = document.querySelector("meta[name='csrf-token']").getAttribute("content")
-let liveSocket = new LiveSocket("/live", Socket, {params: {_csrf_token: csrfToken}})
+let liveSocket = new LiveSocket("/live", Socket, {hooks: LiveHooks, params: {_csrf_token: csrfToken}})
 // let liveSocket = new LiveSocket("/live", Socket, { hooks: LiveHooks, logger: logger, params: { _csrf_token: csrfToken } })
 
 // Connect if there are any LiveViews on the page
@@ -33,4 +34,4 @@ liveSocket.connect()
 // Call disableLatencySim() to disable:
 // >> liveSocket.disableLatencySim()
 window.liveSocket = liveSocket
-
+window.LiveHooks = LiveHooks;

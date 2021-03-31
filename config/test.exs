@@ -21,5 +21,9 @@ config :asf_web, AsfWeb.Endpoint,
   http: [port: 4002],
   server: false
 
+config :asf_bo_web, AsfBOWeb.Endpoint,
+  http: [port: 4012],
+  server: false
+
 # Print only warnings and errors during test
 config :logger, level: :warn

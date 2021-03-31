@@ -17,11 +17,22 @@ config :asf_web,
   ecto_repos: [Asf.Repo],
   generators: [context_app: :asf]
 
-# Configures the endpoint
+config :asf_bo_web,
+  ecto_repos: [Asf.Repo],
+  generators: [context_app: :asf]
+
+# Configures the endpoints
 config :asf_web, AsfWeb.Endpoint,
   url: [host: "localhost"],
   secret_key_base: "/WSlDAyMNVNLlCp6H2QnySHGpCZeC1cJsjhNCvif0vWDYvulpADRsdOr+/PRjNyl",
   render_errors: [view: AsfWeb.ErrorView, accepts: ~w(html json), layout: false],
+  pubsub_server: Asf.PubSub,
+  live_view: [signing_salt: "iJGOiC56"]
+
+config :asf_bo_web, AsfBOWeb.Endpoint,
+  url: [host: "localhost"],
+  secret_key_base: "hyYFxtyWkd6pdobAET3SLY+CPioAZmXKIbo6OQD/UvVqPfE4EN/xXExdyaVn8Z8F",
+  render_errors: [view: AsfBOWeb.ErrorView, accepts: ~w(html json), layout: false],
   pubsub_server: Asf.PubSub,
   live_view: [signing_salt: "iJGOiC56"]
 

@@ -13,6 +13,10 @@ config :asf_web, AsfWeb.Endpoint,
   url: [host: "example.com", port: 80],
   cache_static_manifest: "priv/static/cache_manifest.json"
 
+config :asf_bo_web, AsfBOWeb.Endpoint,
+  url: [host: "example.com", port: 80],
+  cache_static_manifest: "priv/static/cache_manifest.json"
+
 # ## SSL Support
 #
 # To get SSL working, you will need to add the `https` key

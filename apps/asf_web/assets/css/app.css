@@ -42,3 +42,14 @@
   display: block;
   margin: -1rem 0 2rem;
 }
+
+@layer base {
+  ol {
+    @apply list-inside;
+    @apply list-decimal;
+  }
+  ul {
+    @apply list-inside;
+    @apply list-disc;
+  }
+}
