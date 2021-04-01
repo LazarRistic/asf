@@ -21,6 +21,12 @@ defmodule AsfBOWeb.Live.SideMenu do
   def get_classes_dependent_of_path(:documents, "/documents" <> _),
     do: "text-gray-700 bg-gray-100"
 
+  def get_classes_dependent_of_path(:admin_users, "/users/admin"),
+    do: "text-gray-700 bg-gray-100"
+
+  def get_classes_dependent_of_path(:users, "/users/regular"),
+    do: "text-gray-700 bg-gray-100"
+
   def get_classes_dependent_of_path(_, _),
     do: "hover:text-gray-700 text-gray-300 hover:bg-gray-100"
 end

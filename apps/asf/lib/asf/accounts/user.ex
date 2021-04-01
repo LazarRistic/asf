@@ -13,6 +13,7 @@ defmodule Asf.Accounts.User do
     field :username, :string
     field :phone_number, :string
     field :avatar_url, :string
+    field :roles, {:array, :string}, default: []
 
     timestamps()
   end
@@ -36,7 +37,10 @@ defmodule Asf.Accounts.User do
   """
   def registration_changeset(user, attrs, opts \\ []) do
     user
-    |> cast(attrs, ~w(email password username first_name last_name phone_number avatar_url)a)
+    |> cast(
+      attrs,
+      ~w(email password username first_name last_name phone_number avatar_url roles)a
+    )
     |> validate_email()
     |> validate_password(opts)
     |> validate_username()

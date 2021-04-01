@@ -346,4 +346,38 @@ defmodule Asf.Accounts do
       {:error, :user, changeset, _} -> {:error, changeset}
     end
   end
+
+  @doc """
+  Returns the list of users with no roles.
+
+  ## Examples
+
+      iex> list_non_admin_users()
+      [%User{}, ...]
+
+  """
+  def list_non_admin_users do
+    from(
+      user in User,
+      where: fragment("? = '{}'", user.roles)
+    )
+    |> Repo.all()
+  end
+
+  @doc """
+  Returns the list of users with admin roles.
+
+  ## Examples
+
+      iex> list_admin_users()
+      [%User{}, ...]
+
+  """
+  def list_admin_users do
+    from(
+      user in User,
+      where: "admin" in user.roles
+    )
+    |> Repo.all()
+  end
 end
