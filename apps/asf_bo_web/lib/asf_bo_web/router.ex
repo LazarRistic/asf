@@ -7,10 +7,10 @@ defmodule AsfBOWeb.Router do
     plug :accepts, ["html"]
     plug :fetch_session
     plug :fetch_live_flash
+    plug :put_root_layout, {AsfBOWeb.LayoutView, :root}
     plug :protect_from_forgery
     plug :put_secure_browser_headers
     plug :fetch_current_user
-    plug :put_root_layout, {AsfBOWeb.LayoutView, :root}
   end
 
   pipeline :api do
@@ -18,7 +18,7 @@ defmodule AsfBOWeb.Router do
   end
 
   scope "/", AsfBOWeb do
-    pipe_through :browser
+    pipe_through [:browser, :require_authenticated_user]
 
     get "/", PageController, :index
 
