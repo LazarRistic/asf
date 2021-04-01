@@ -11,7 +11,8 @@ defmodule AsfWeb.ErrorHelpers do
   def error_tag(form, field) do
     Enum.map(Keyword.get_values(form.errors, field), fn error ->
       content_tag(:span, translate_error(error),
-        class: "text-input_error appearance-none rounded-none relative block w-full px-3 mb-2 focus:outline-none focus:z-10 sm:text-sm",
+        class:
+          "text-input_error appearance-none rounded-none relative block w-full px-3 mb-2 focus:outline-none focus:z-10 sm:text-sm",
         phx_feedback_for: input_name(form, field)
       )
     end)

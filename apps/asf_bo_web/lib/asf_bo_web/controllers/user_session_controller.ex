@@ -5,7 +5,7 @@ defmodule AsfBOWeb.UserSessionController do
   alias AsfBOWeb.UserAuth
 
   def new(conn, _params) do
-    render(conn, "new.html", error_message: nil)
+    render(conn, "new.html", error_message: nil, page_title: "Sing In")
   end
 
   def create(conn, %{"user" => user_params}) do
