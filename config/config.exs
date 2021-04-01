@@ -34,7 +34,7 @@ config :asf_bo_web, AsfBOWeb.Endpoint,
   secret_key_base: "hyYFxtyWkd6pdobAET3SLY+CPioAZmXKIbo6OQD/UvVqPfE4EN/xXExdyaVn8Z8F",
   render_errors: [view: AsfBOWeb.ErrorView, accepts: ~w(html json), layout: false],
   pubsub_server: Asf.PubSub,
-  live_view: [signing_salt: "iJGOiC56"]
+  live_view: [signing_salt: "HPrGMjCtd+VivhNgbSYYb8iDEAi7l/ZP"]
 
 # Configures Elixir's Logger
 config :logger, :console,
