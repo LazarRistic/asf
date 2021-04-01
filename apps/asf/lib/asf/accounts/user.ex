@@ -8,6 +8,11 @@ defmodule Asf.Accounts.User do
     field :password, :string, virtual: true
     field :hashed_password, :string
     field :confirmed_at, :naive_datetime
+    field :first_name, :string
+    field :last_name, :string
+    field :username, :string
+    field :phone_number, :string
+    field :avatar_url, :string
 
     timestamps()
   end
@@ -31,9 +36,10 @@ defmodule Asf.Accounts.User do
   """
   def registration_changeset(user, attrs, opts \\ []) do
     user
-    |> cast(attrs, [:email, :password])
+    |> cast(attrs, ~w(email password username first_name last_name phone_number avatar_url)a)
     |> validate_email()
     |> validate_password(opts)
+    |> validate_username()
   end
 
   defp validate_email(changeset) do
@@ -53,6 +59,13 @@ defmodule Asf.Accounts.User do
     # |> validate_format(:password, ~r/[A-Z]/, message: "at least one upper case character")
     # |> validate_format(:password, ~r/[!?@#$%^&*_0-9]/, message: "at least one digit or punctuation character")
     |> maybe_hash_password(opts)
+  end
+
+  defp validate_username(changeset) do
+    changeset
+    |> validate_required([:username])
+    |> validate_length(:username, max: 50)
+    |> unique_constraint(:username)
   end
 
   defp maybe_hash_password(changeset, opts) do
