@@ -79,7 +79,18 @@
 
         </span>
         <span class="ml-3">Users</span>
-        <span class="flex items-center justify-center text-xs text-red-500 font-semibold bg-red-100 h-6 px-2 rounded-full ml-auto"><%= Asf.Accounts.list_non_admin_users |> length() %></span>
+        <% not_confirmed_users =
+          Asf.Accounts.list_non_admin_users
+          |> Enum.reduce(0, fn
+              %{confirmed_at: nil}, acc -> acc + 1
+              _, acc -> acc
+            end) %>
+
+        <%= if not_confirmed_users != 0 do %>
+          <span class="flex items-center justify-center text-xs text-red-500 font-semibold bg-red-100 h-6 px-2 rounded-full ml-auto">
+            <%= not_confirmed_users %>
+          </span>
+        <% end %>
       </a>
     </li>
     <li class="my-px">
@@ -91,7 +102,6 @@
           </svg>
         </span>
         <span class="ml-3">BO Users</span>
-        <span class="flex items-center justify-center text-xs text-red-500 font-semibold bg-red-100 h-6 px-2 rounded-full ml-auto"><%= Asf.Accounts.list_admin_users |> length() %></span>
       </a>
     </li>
     <li class="my-px">
