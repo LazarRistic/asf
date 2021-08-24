@@ -25,6 +25,8 @@ defmodule AsfBOWeb.Router do
     scope "/users", Live.User do
       live "/regular", ListController
       live "/admin", AdminListController
+      live "/new", CreationController
+      live "/edit/:username", AlterationController
     end
 
     scope "/documents", Live.Document do

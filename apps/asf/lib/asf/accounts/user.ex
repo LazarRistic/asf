@@ -120,6 +120,30 @@ defmodule Asf.Accounts.User do
   end
 
   @doc """
+  A user changeset for changing first name, last name and phone number.
+  """
+  def info_changeset(user, attrs) do
+    user
+    |> cast(attrs, [:first_name, :last_name, :phone_number])
+  end
+
+  @doc """
+  A user changeset for changing roles.
+  """
+  def roles_changeset(user, attrs) do
+    user
+    |> cast(attrs, [:roles])
+  end
+
+  @doc """
+  A user changeset for changing the avatar.
+  """
+  def avatar_changeset(user, attrs) do
+    user
+    |> cast(attrs, [:avatar_url])
+  end
+
+  @doc """
   Confirms the account by setting `confirmed_at`.
   """
   def confirm_changeset(user) do

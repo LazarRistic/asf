@@ -21,6 +21,10 @@ config :asf_bo_web,
   ecto_repos: [Asf.Repo],
   generators: [context_app: :asf]
 
+config :asf_fh_web,
+  ecto_repos: [Asf.Repo],
+  generators: [context_app: :asf]
+
 # Configures the endpoints
 config :asf_web, AsfWeb.Endpoint,
   url: [host: "localhost"],
@@ -35,6 +39,12 @@ config :asf_bo_web, AsfBOWeb.Endpoint,
   render_errors: [view: AsfBOWeb.ErrorView, accepts: ~w(html json), layout: false],
   pubsub_server: Asf.PubSub,
   live_view: [signing_salt: "HPrGMjCtd+VivhNgbSYYb8iDEAi7l/ZP"]
+
+config :asf_fh_web, AsfFHWeb.Endpoint,
+  url: [host: "localhost"],
+  secret_key_base: "Ep4naZvz1+ZY0XJpAQQdjpVPu9QwbWaSYn3Pw3PxmVcf/8ExT665+YAmmMTrH5zK",
+  render_errors: [view: AsfFHWeb.ErrorView, accepts: ~w(html json), layout: false],
+  pubsub_server: Asf.PubSub
 
 # Configures Elixir's Logger
 config :logger, :console,

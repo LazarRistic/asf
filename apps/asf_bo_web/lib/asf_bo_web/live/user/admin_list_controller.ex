@@ -16,4 +16,6 @@ defmodule AsfBOWeb.Live.User.AdminListController do
 
   def empty_values(value) when value in [nil, ""], do: "/"
   def empty_values(value), do: value
+
+  def print_role("admin"), do: "BO User"
 end

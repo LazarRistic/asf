@@ -12,13 +12,12 @@ defmodule AsfBOWeb.Live.Document.AlterationController do
   end
 
   def handle_params(params, _url, socket) do
-    changeset =
-      params["uuid"]
-      |> Documents.get_document!()
-      |> Document.changeset(%{})
+    document = Documents.get_document!(params["uuid"])
+    changeset = Document.changeset(document, %{})
 
     {:noreply,
      assign(socket,
+        page_title: "Edit #{document.title}",
        changeset: changeset
      )}
   end

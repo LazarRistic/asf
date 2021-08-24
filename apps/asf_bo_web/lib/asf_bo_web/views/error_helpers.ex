@@ -18,6 +18,29 @@ defmodule AsfBOWeb.ErrorHelpers do
   end
 
   @doc """
+  Generates tag for inlined form input errors with attributes.
+  """
+  def error_tag(form, field, attrs) do
+    attrs =
+      attrs
+      |> Enum.map(fn
+        {:class, value} ->
+          classes =
+            value <> " " <> "invalid-feedback"
+            |> String.trim()
+
+          {:class, classes}
+        value -> value
+      end)
+
+    Enum.map(Keyword.get_values(form.errors, field), fn error ->
+      content_tag(:span, translate_error(error),
+        attrs ++ [phx_feedback_for: input_name(form, field)]
+      )
+    end)
+  end
+
+  @doc """
   Translates an error message using gettext.
   """
   def translate_error({msg, opts}) do

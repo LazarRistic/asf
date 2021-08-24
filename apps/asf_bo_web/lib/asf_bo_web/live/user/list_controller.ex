@@ -4,7 +4,12 @@ defmodule AsfBOWeb.Live.User.ListController do
   alias Asf.Accounts
 
   def mount(_params, _session, socket) do
-    socket = assign(socket, users: [])
+    socket =
+      assign(socket,
+        page_title: "Users",
+        users: []
+      )
+
     {:ok, socket}
   end
 
