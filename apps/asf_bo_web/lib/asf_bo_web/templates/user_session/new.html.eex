@@ -32,7 +32,7 @@
           <%= label f, :remember_me, "Remember me", class: "ml-2 block text-sm text-gray-900" %>
         </div>
         <div class="text-sm">
-          <%= link "Register", to: Routes.user_session_path(@conn, :new), class: "font-medium text-indigo-600 hover:text-indigo-500" %> |
+          <%= link "Register", to: Routes.user_registration_path(@conn, :new), class: "font-medium text-indigo-600 hover:text-indigo-500" %> |
           <%= link "Forgot your password?", to: Routes.user_reset_password_path(@conn, :new), class: "font-medium text-indigo-600 hover:text-indigo-500" %>
         </div>
       </div>

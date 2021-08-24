@@ -1,13 +1,31 @@
 /* This file is for your main application css. */
 /* @import "./phoenix.css"; */
 
+:root {
+  --color-primary: 18, 1, 143;
+  --color-secondary: 143, 18, 1;
+  --color-tertiary: 1, 143, 18;
+}
+
 @tailwind base;
 
 @tailwind components;
 
 @tailwind utilities;
 
+/* @import "tailwindcss/base"; */
+/* @import "tailwindcss/components"; */
+@import "./custom-styles.css";
+/* @import "tailwindcss/utilities"; */
+
 @import '~@fortawesome/fontawesome-free/css/all.css';
+
+/* Multi select */
+.top-100 {top: 100%}
+.bottom-100 {bottom: 100%}
+.max-h-select {
+    max-height: 300px;
+}
 
 /* Alerts and form errors */
 .alert {
@@ -40,13 +58,11 @@
 .invalid-feedback {
   color: #a94442;
   display: block;
-  margin: -1rem 0 2rem;
 }
 
-.material-icons.md-18 { font-size: 18px; }
-.material-icons.md-24 { font-size: 24px; }
-.material-icons.md-36 { font-size: 36px; }
-.material-icons.md-48 { font-size: 48px; }
+iframe[src="/phoenix/live_reload/frame"] {
+  display: none;
+}
 
 @layer base {
   ol {
@@ -56,5 +72,11 @@
   ul {
     @apply list-inside;
     @apply list-disc;
+  }
+  html {
+    @apply h-full;
+  }
+  body {
+    @apply h-full;
   }
 }

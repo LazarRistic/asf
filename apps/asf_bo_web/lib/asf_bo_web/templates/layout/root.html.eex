@@ -1,6 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
+    <link rel="apple-touch-icon" sizes="180x180" href="<%= Routes.static_path(@conn, "/apple-touch-icon.png") %>">
+    <link rel="icon" type="image/png" sizes="32x32" href="<%= Routes.static_path(@conn, "/favicon-32x32.png") %>">
+    <link rel="icon" type="image/png" sizes="16x16" href="<%= Routes.static_path(@conn, "/favicon-16x16.png") %>">
+    <link rel="manifest" href="<%= Routes.static_path(@conn, "/site.webmanifest") %>">
+    <link rel="mask-icon" href="<%= Routes.static_path(@conn, "/safari-pinned-tab.svg") %>" color="#5bbad5">
+    <meta name="msapplication-TileColor" content="#da532c">
+    <meta name="theme-color" content="#ffffff">
     <meta charset="utf-8"/>
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
@@ -14,31 +21,31 @@
   <body style>
     <div class="flex flex-row min-h-screen bg-gray-50 text-gray-800">
       <%= if @current_user != nil do %>
-        <aside class="sidebar w-64 md:shadow transform -translate-x-full md:translate-x-0 transition-transform duration-150 ease-in bg-indigo-500">
+        <aside class="sidebar w-64 md:shadow transform -translate-x-full md:translate-x-0 transition-transform duration-150 ease-in bg-primary">
           <%= live_render @conn, AsfBOWeb.Live.SideMenu, session: %{"current_path"=> @conn.request_path, "query_string"=> @conn.query_string, "current_user" => @current_user} %>
         </aside>
       <% end %>
-      <main class="main flex flex-col flex-grow -ml-64 md:ml-0 transition-all duration-150 ease-in">
+      <div class="flex flex-col flex-grow -ml-64 md:ml-0 transition-all duration-150 ease-in">
         <%= if @current_user != nil do %>
           <%= live_render @conn, AsfBOWeb.Live.Header, session: %{"current_path"=> @conn.request_path, "query_string"=> @conn.query_string, "current_user" => @current_user} %>
         <% end %>
-        <div class="main-content flex flex-col flex-grow p-4">
+        <div class="flex flex-col flex-grow p-4">
           <%= if @current_user != nil do %>
             <h1 class="font-bold text-2xl text-gray-700">
               <p><%= assigns[:page_title] %></p>
             </h1>
           <% end %>
 
-          <div class="flex flex-col flex-grow rounded mt-4">
+          <div class="main-content flex flex-col flex-grow rounded mt-4">
             <%= @inner_content %>
           </div>
+          <footer class="footer px-4 py-6">
+            <div class="footer-content">
+              <p class="text-sm text-gray-600 text-center">© SASS <%= NaiveDateTime.local_now().year %>. All rights reserved. <a href="https://twitter.com/rista_junior">by Lazar Ristic</a></p>
+            </div>
+          </footer>
         </div>
-        <footer class="footer px-4 py-6">
-          <div class="footer-content">
-            <p class="text-sm text-gray-600 text-center">© Company <%= NaiveDateTime.local_now().year %>. All rights reserved. <a href="https://twitter.com/rista_junior">by Lazar Ristic</a></p>
-          </div>
-        </footer>
-      </main>
+      </div>
     </div>
   </body>
 </html>

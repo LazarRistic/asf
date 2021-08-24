@@ -41,7 +41,22 @@ config :asf_bo_web, AsfBOWeb.Endpoint,
       "--mode",
       "development",
       "--watch-stdin",
-      cd: Path.expand("../apps/asf_web/assets", __DIR__)
+      cd: Path.expand("../apps/asf_bo_web/assets", __DIR__)
+    ]
+  ]
+
+config :asf_fh_web, AsfFHWeb.Endpoint,
+  http: [port: 4020],
+  debug_errors: true,
+  code_reloader: true,
+  check_origin: false,
+  watchers: [
+    node: [
+      "node_modules/webpack/bin/webpack.js",
+      "--mode",
+      "development",
+      "--watch-stdin",
+      cd: Path.expand("../apps/asf_fh_web/assets", __DIR__)
     ]
   ]
 
@@ -73,7 +88,7 @@ config :asf_bo_web, AsfBOWeb.Endpoint,
 config :asf_web, AsfWeb.Endpoint,
   live_reload: [
     patterns: [
-      ~r"priv/static/.*(js|css|png|jpeg|jpg|gif|svg)$",
+      ~r"priv/static/(?!uploads).*(js|css|png|jpeg|jpg|gif|svg)$",
       ~r"priv/gettext/.*(po)$",
       ~r"lib/asf_web/(live|views)/.*(ex)$",
       ~r"lib/asf_web/templates/.*(eex)$"
@@ -83,10 +98,20 @@ config :asf_web, AsfWeb.Endpoint,
 config :asf_bo_web, AsfBOWeb.Endpoint,
   live_reload: [
     patterns: [
-      ~r"priv/static/.*(js|css|png|jpeg|jpg|gif|svg)$",
+      ~r"priv/static/(?!uploads).*(js|css|png|jpeg|jpg|gif|svg)$",
       ~r"priv/gettext/.*(po)$",
-      ~r"lib/asf_web/(live|views)/.*(ex)$",
-      ~r"lib/asf_web/templates/.*(eex)$"
+      ~r"lib/asf_bo_web/(live|views)/.*(ex)$",
+      ~r"lib/asf_bo_web/templates/.*(eex)$"
+    ]
+  ]
+
+config :asf_fh_web, AsfFHWeb.Endpoint,
+  live_reload: [
+    patterns: [
+      ~r"priv/static/(?!uploads).*(js|css|png|jpeg|jpg|gif|svg)$",
+      ~r"priv/gettext/.*(po)$",
+      ~r"lib/asf_fh_web/(live|views)/.*(ex)$",
+      ~r"lib/asf_fh_web/templates/.*(eex)$"
     ]
   ]
 

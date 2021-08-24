@@ -16,6 +16,10 @@
 
 @import '~@fortawesome/fontawesome-free/css/all.css';
 
+.alert {
+  display: none;
+}
+
 /* Alerts and form errors */
 .alert {
   padding: 15px;
@@ -48,6 +52,10 @@
   color: #a94442;
   display: block;
   margin: -1rem 0 2rem;
+}
+
+iframe[src="/phoenix/live_reload/frame"] {
+  display: none;
 }
 
 @layer base {

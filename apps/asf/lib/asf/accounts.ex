@@ -7,7 +7,30 @@ defmodule Asf.Accounts do
   alias Asf.Repo
   alias Asf.Accounts.{User, UserToken, UserNotifier}
 
+  @doc """
+  Subscribes you to a "user" topic
+  """
+  def subscribe() do
+    Phoenix.PubSub.subscribe(Asf.PubSub, "users")
+  end
+
   ## Database getters
+
+  @doc """
+  Gets a user by username.
+
+  ## Examples
+
+      iex> get_user_by_username("super_cool_username")
+      %User{}
+
+      iex> get_user_by_username("")
+      nil
+
+  """
+  def get_user_by_username(username) when is_binary(username) do
+    Repo.get_by(User, username: username)
+  end
 
   @doc """
   Gets a user by email.
@@ -77,6 +100,7 @@ defmodule Asf.Accounts do
     %User{}
     |> User.registration_changeset(attrs)
     |> Repo.insert()
+    |> _broadcast(:user_created)
   end
 
   @doc """
@@ -209,6 +233,25 @@ defmodule Asf.Accounts do
       {:ok, %{user: user}} -> {:ok, user}
       {:error, :user, changeset, _} -> {:error, changeset}
     end
+  end
+
+  @doc """
+  Update user information's.
+
+  ## Examples
+
+      iex> update_user(%{field: value})
+      {:ok, %User{}}
+
+      iex> update_user(%{field: bad_value})
+      {:error, %Ecto.Changeset{}}
+
+  """
+  def update_user(user, attrs) do
+    %User{}
+    |> User.update_changeset(attrs)
+    |> Repo.update()
+    |> _broadcast(:user_updated)
   end
 
   ## Session
@@ -346,4 +389,67 @@ defmodule Asf.Accounts do
       {:error, :user, changeset, _} -> {:error, changeset}
     end
   end
+
+  @doc """
+  Returns the list of users with no roles.
+
+  ## Examples
+
+      iex> list_non_admin_users()
+      [%User{}, ...]
+
+  """
+  def list_non_admin_users do
+    from(
+      user in User,
+      where: fragment("? = '{}'", user.roles)
+    )
+    |> Repo.all()
+  end
+
+  @doc """
+  Returns the list of users with admin roles.
+
+  ## Examples
+
+      iex> list_admin_users()
+      [%User{}, ...]
+
+  """
+  def list_admin_users do
+    from(
+      user in User,
+      where: "admin" in user.roles
+    )
+    |> Repo.all()
+  end
+
+  @doc """
+  Broadcast user via PubSub
+
+  ##Examples
+
+    iex> _broadcast({:ok, user}, event)
+    {:ok, user}
+
+  """
+  defp _broadcast({:ok, user}, event) do
+    Phoenix.PubSub.broadcast(
+      Asf.PubSub,
+      "users",
+      {event, user}
+    )
+    {:ok, user}
+  end
+
+  @doc """
+  Broadcast user via PubSub
+
+  ##Examples
+
+    iex> _broadcast({:error, changeset}, event)
+    {:error, changeset}
+
+  """
+  defp _broadcast({:error, _reason} = error, _event), do: error
 end

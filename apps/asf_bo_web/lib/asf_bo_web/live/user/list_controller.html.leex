@@ -1,0 +1,96 @@
+<div class="flex flex-col">
+  <div class="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
+    <div class="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
+      <div class="shadow overflow-hidden border-b border-gray-200 sm:rounded-lg">
+        <table class="min-w-full divide-y divide-gray-200">
+          <thead class="bg-gray-50">
+            <tr>
+              <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                Name
+              </th>
+              <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                Username
+              </th>
+              <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                Phone number
+              </th>
+              <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                Status
+              </th>
+              <th scope="col" class="relative px-6 py-3">
+                <span class="sr-only">Edit</span>
+              </th>
+            </tr>
+          </thead>
+          <tbody class="bg-white divide-y divide-gray-200">
+            <%= for user <- @users do %>
+                <tr>
+                    <td class="px-6 py-4 whitespace-nowrap">
+                        <div class="flex items-center">
+                        <div class="flex-shrink-0 h-10 w-10">
+                          <%= unless user.avatar_url in ["", nil] do %>
+                            <img class="h-10 w-10 rounded-full object-cover" src="<%= "#{AsfFHWeb.Endpoint.static_url()}#{AsfFHWeb.Endpoint.static_path(user.avatar_url)}" %>" alt="avatar">
+                          <% else %>
+                            <div class="h-10 w-10 rounded-full">
+                              <svg id="Filled" height="40" viewBox="0 0 512 512" width="40" xmlns="http://www.w3.org/2000/svg">
+                                <path d="m176 296h160s128 40 144 72c0 0 8 16 8 120h-464c0-104 8-120 8-120 16-32 144-72 144-72" fill="#7b854e"/>
+                                <path d="m488 488h-248v-56s54.92-68.65 63.01-136h32.99s128 40 144 72c0 0 8 16 8 120z" fill="#828c52"/>
+                                <path d="m208 248h96v72h-96z" fill="#e0b999"/>
+                                <path d="m176 136h160a0 0 0 0 1 0 0v64a64 64 0 0 1 -64 64h-32a64 64 0 0 1 -64-64v-64a0 0 0 0 1 0 0z" fill="#f0c6a4"/>
+                                <path d="m336 120s16-40 0-64-40-32-80-32-96 24-112 80 32 48 32 48h160z" fill="#828c52"/>
+                                <path d="m336 120v32h-160s16 0 24-32z" fill="#737d49"/>
+                                <circle cx="272" cy="72" fill="#c3c6c7" r="16"/>
+                                <path d="m304 296v32s-16 16-48 16-48-16-48-16v-32s16 16 48 16 48-16 48-16z" fill="#60663c"/>
+                                <path d="m304 280 32 16 32 72-128 64s64-80 64-152z" fill="#737d49"/>
+                                <path d="m328 424h128v32h-128z" fill="#60663c"/>
+                                <path d="m328 456h128v32h-128z" fill="#737d49"/>
+                                <path d="m256 409.5c-2.7 4.1-5.19 7.74-7.36 10.82l-104.64-52.32 32-72 32-16c0 48.5 29.05 100.64 48 129.5z" fill="#737d49"/>
+                                <path d="m56 424h128v32h-128z" fill="#60663c" transform="matrix(-1 0 0 -1 240 880)"/>
+                                <path d="m56 456h128v32h-128z" fill="#737d49" transform="matrix(-1 0 0 -1 240 944)"/>
+                                <path d="m175.75 152a.808.808 0 0 0 -.15.01.1.1 0 0 0 .04-.01z" fill="#737d49"/>
+                                <path d="m405.046 312.6c-31.378-12.92-61.428-22.579-66.033-24.041l-27.013-13.503v-15.223a71.984 71.984 0 0 0 32-59.833v-78.538c2.938-8.04 15.1-45.238-1.344-69.9-16.839-25.262-41.945-35.562-86.656-35.562-23.249 0-48.476 7.362-69.211 20.2-25.224 15.614-42.68 38.3-50.481 65.6-6.022 21.075-4.411 36.985 4.788 47.288 7.8 8.741 19.018 10.917 26.9 11.238v39.674a71.984 71.984 0 0 0 32 59.833v15.223l-27.013 13.506c-4.6 1.462-34.655 11.121-66.033 24.041-47.621 19.608-74.479 36.558-82.109 51.819-1.474 2.954-8.841 22.795-8.841 123.578a8 8 0 0 0 8 8h464a8 8 0 0 0 8-8c0-100.783-7.367-120.624-8.845-123.578-7.63-15.261-34.488-32.211-82.109-51.822zm67.8 58.975a1.623 1.623 0 0 1 -.078-.153zm-115.26-7.314-92.786 46.397c4.437-6.9 9.313-14.921 14.209-23.794 18.994-34.426 29.865-66.05 32.412-94.212l18.438 9.22zm-101.612 30.26a351.38 351.38 0 0 1 -23.661-45.472 96.536 96.536 0 0 0 47.361 0 352.279 352.279 0 0 1 -23.7 45.472zm31.118-65.034a77.459 77.459 0 0 1 -62.186 0c-1.806-5.468-3.4-11.014-4.725-16.592a93.8 93.8 0 0 0 71.652-.006c-1.328 5.573-2.933 11.121-4.741 16.598zm-81.046-201.487h121.954v16h-129.107a69.6 69.6 0 0 0 7.153-16zm-53.015 10.436c-6.605-7.4-4.374-21.616-1.339-32.239 15.554-54.437 70.901-74.197 104.308-74.197 39.137 0 59.7 7.974 73.344 28.438 10.436 15.654 4.293 40.88.952 51.562h-118.896c6.084-12.176 15.173-16.389 15.747-16.646a8 8 0 0 0 -6.23-14.736c-.881.367-21.645 9.33-28.678 37.442-6.122 24.487-16.539 25.94-16.639 25.955a1.878 1.878 0 0 1 .4-.015 8.045 8.045 0 0 0 -1.315.108c-.144.026-14.635 2.192-21.654-5.672zm30.969 61.564v-40h144v40a56.063 56.063 0 0 1 -56 56h-32a56.063 56.063 0 0 1 -56-56zm56 72h32a71.659 71.659 0 0 0 24-4.128v12.128a124.236 124.236 0 0 1 -.677 12.733 53.071 53.071 0 0 1 -7.563 4.438 77.268 77.268 0 0 1 -63.52 0 53.1 53.1 0 0 1 -7.555-4.432 124.075 124.075 0 0 1 -.685-12.739v-12.128a71.659 71.659 0 0 0 24 4.128zm-39.4 20.645c4.142 44.686 28.836 90.153 45.809 116.755-.144.214-.291.433-.434.644l-91.56-45.78 27.73-62.392zm-161.367 78.78a1.623 1.623 0 0 1 -.078.153zm.033-.063c8.124-15.591 54.187-35.893 73.683-43.924 18.213-7.5 35.973-13.885 48.39-18.148l-24.65 55.461a8 8 0 0 0 3.733 10.4l96.193 48.1c-1.75 2.346-2.784 3.653-2.862 3.75a7.986 7.986 0 0 0 -1.753 4.999v48h-40v-56a8 8 0 0 0 -8-8h-128a8 8 0 0 0 -8 8v56h-15.983c.359-87.616 6.592-106.856 7.249-108.638zm136.734 76.638h-112v-16h112zm-112 16h112v16h-112zm384-16h-112v-16h112zm-112 32v-16h112v16zm128 0v-56a8 8 0 0 0 -8-8h-128a8 8 0 0 0 -8 8v56h-72v-43.056l123.578-61.789a8 8 0 0 0 3.733-10.4l-24.65-55.461c12.417 4.263 30.177 10.645 48.39 18.148 19.5 8.031 65.559 28.333 73.683 43.924.657 1.782 6.89 21.022 7.249 108.638z"/>
+                                <path d="m272 96a24 24 0 1 0 -24-24 24.028 24.028 0 0 0 24 24zm0-32a8 8 0 1 1 -8 8 8.009 8.009 0 0 1 8-8z"/>
+                              </svg>
+                            </div>
+                          <% end %>
+                        </div>
+                        <div class="ml-4">
+                            <div class="text-sm font-medium text-gray-900">
+                                <%= "#{user.first_name} #{user.last_name}" %>
+                            </div>
+                            <div class="text-sm text-gray-500">
+                                <%= user.email %>
+                            </div>
+                        </div>
+                        </div>
+                    </td>
+                    <td class="px-6 py-4 whitespace-nowrap">
+                        <div class="text-sm text-gray-900"><%= user.username %></div>
+                        <%# <div class="text-sm text-gray-500">Optimization</div> %>
+                    </td>
+                    <td class="px-6 py-4 whitespace-nowrap">
+                        <div class="text-sm text-gray-900"><%= user.phone_number |> empty_values() %></div>
+                    </td>
+                    <td class="px-6 py-4 whitespace-nowrap">
+                        <%= if user.confirmed_at == nil do %>
+                            <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-red-100 text-red-800">
+                                Not confirmed
+                            </span>
+                        <% else %>
+                            <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">
+                                Confirmed
+                            </span>
+                        <% end %>
+
+                    </td>
+                    <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+                        <a href="<%= Routes.live_path(@socket, AsfBOWeb.Live.User.AlterationController, user.username) %>" class="text-indigo-600 hover:text-indigo-900">Edit</a>
+                    </td>
+                </tr>
+            <% end %>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>

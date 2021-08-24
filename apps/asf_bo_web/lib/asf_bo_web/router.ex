@@ -22,6 +22,13 @@ defmodule AsfBOWeb.Router do
 
     get "/", PageController, :index
 
+    scope "/users", Live.User do
+      live "/regular", ListController
+      live "/admin", AdminListController
+      live "/new", CreationController
+      live "/edit/:username", AlterationController
+    end
+
     scope "/documents", Live.Document do
       live "/", ListController
       live "/new", CreationController

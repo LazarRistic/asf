@@ -49,6 +49,7 @@ defmodule AsfBOWeb.MixProject do
       {:gettext, "~> 0.11"},
       {:elixir_uuid, "~> 1.2"},
       {:asf, in_umbrella: true},
+      {:asf_fh_web, in_umbrella: true},
       {:jason, "~> 1.0"},
       {:plug_cowboy, "~> 2.0"},
       {:phx_gen_auth, "~> 0.6", only: [:dev], runtime: false}

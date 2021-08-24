@@ -1,4 +1,4 @@
-<div class="w-full min-h-screen flex items-center justify-center bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
+<div class="w-full flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
   <%= if @changeset.action do %>
     <div class="alert alert-danger">
       <p>Oops, something went wrong! Please check the errors below.</p>
@@ -15,8 +15,28 @@
       <input type="hidden" name="remember" value="true">
       <div class="rounded-md shadow-sm -space-y-px">
         <div>
+          <%= label f, :first_name, class: "sr-only" %>
+          <%= text_input f, :first_name, required: true, autocomplete: "given-name", class: "appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm", placeholder: "First name" %>
+          <%= error_tag f, :first_name %>
+        </div>
+        <div>
+          <%= label f, :last_name, class: "sr-only" %>
+          <%= text_input f, :last_name, required: true, autocomplete: "family-name", class: "appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm", placeholder: "Last name" %>
+          <%= error_tag f, :last_name %>
+        </div>
+        <div>
+          <%= label f, :username, class: "sr-only" %>
+          <%= text_input f, :username, required: true, autocomplete: "username", class: "appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm", placeholder: "Username" %>
+          <%= error_tag f, :username %>
+        </div>
+        <div>
+          <%= label f, :phone_number, class: "sr-only" %>
+          <%= telephone_input f, :phone_number, required: true, autocomplete: "tel", class: "appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm", placeholder: "Phone number" %>
+          <%= error_tag f, :phone_number %>
+        </div>
+        <div>
           <%= label f, :email, class: "sr-only" %>
-          <%= email_input f, :email, required: true, autocomplete: "email", class: "appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm", placeholder: "Email address" %>
+          <%= email_input f, :email, required: true, autocomplete: "email", class: "appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm", placeholder: "Email address" %>
           <%= error_tag f, :email %>
         </div>
         <div>

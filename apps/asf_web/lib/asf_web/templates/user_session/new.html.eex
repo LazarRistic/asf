@@ -1,4 +1,4 @@
-<div class="w-full min-h-screen flex items-center justify-center bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
+<div class="w-full flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
   <%= if @error_message do %>
     <div class="alert alert-danger">
       <p><%= @error_message %></p>
@@ -32,7 +32,7 @@
           <%= label f, :remember_me, "Remember me", class: "ml-2 block text-sm text-gray-900" %>
         </div>
         <div class="text-sm">
-          <%= link "Register", to: Routes.user_session_path(@conn, :new), class: "font-medium text-indigo-600 hover:text-indigo-500" %> |
+          <%= link "Register", to: Routes.user_registration_path(@conn, :new), class: "font-medium text-indigo-600 hover:text-indigo-500" %> |
           <%= link "Forgot your password?", to: Routes.user_reset_password_path(@conn, :new), class: "font-medium text-indigo-600 hover:text-indigo-500" %>
         </div>
       </div>
